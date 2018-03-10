@@ -132,9 +132,9 @@ class SystemConfig
 
     def describe_java
       return "N/A" unless which "java"
-      java_version = Utils.popen_read("java", "-version")
+      java_version = `#{HOMEBREW_PREFIX}/bin/javac -version`
       return "N/A" unless $CHILD_STATUS.success?
-      java_version[/java version "([\d\._]+)"/, 1] || "N/A"
+      "#{java_version}".gsub('javac ','') || "N/A"
     end
 
     def describe_git
